@@ -22,6 +22,7 @@ def find_hamming_one_string(original_string):
 
             return new_string
 
+#task 1a
 input1 = "randomgibberish" # arbitrary inputs
 input2 = "jkl12jkledaS/.d"
 input3 = "even more random gibby"
@@ -36,6 +37,7 @@ print("This is input1 in hex", encrypted1)
 print("This is input2 in hex", encrypted2)
 print("This is input3 in hex", encrypted3)
 
+#task 1b
 print(encrypted4)
 d = find_hamming_one_string("hello")
 print(d)
