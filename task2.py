@@ -75,6 +75,7 @@ def parse_file(filename):
             #get user and hash value and store together
             for i in range(len(data)):
                 if data[i] == '$':
+                    print(i)
                     user = data[0:i-1]
                     hash_val = data[i:]
                     user_data.append((user, hash_val))
