@@ -28,13 +28,14 @@ def main():
     user_data = parse_file("shadow.txt")
 
     #crack user password
-    parallel_crack(user_data, valid_words)
+    parallel_crack(user_data, valid_words_set)
 
 #check a chunk of words against a given bcrypt hash
 def check_password_chunk(chunk, hash_val):
     for word in chunk:
+        #return the cracked password if found
         if bcrypt.checkpw(word.encode(), hash_val.encode()):
-            return word  # Return the cracked password if found
+            return word 
     return None
 
 #crack passwords in parallel
@@ -64,24 +65,6 @@ def parallel_crack(user_data, valid_words, num_workers=multiprocessing.cpu_count
 
     return cracked_passwords
 
-# def crack_passwords(user_data, valid_words):
-#     cracked_passwords = {}
-#     for user, hash_val in user_data:
-#         print("Attempting to crack password for: " + user)
-#         #start logging time
-#         start_time = time.time()
-#         for word in valid_words:
-#             #start checking passwords with words in nltk corpus
-#             word_bytes = word.encode('utf-8')
-#             if bcrypt.checkpw(word_bytes, hash_val.encode('utf-8')):
-#                 #log time taken to crack password and print to terminal
-#                 time_taken = time.time() - start_time
-#                 cracked_passwords[user] = (word, time_taken)
-#                 print("Cracked " + user + "'s password: " + word + " in " + format(time_taken, ".2f") + " seconds")
-#                 #Stop checking once password is found
-#                 break  
-#     return cracked_passwords
-
 #get the user and hash value
 def parse_file(filename):
     user_data = []
@@ -95,10 +78,8 @@ def parse_file(filename):
                     user = data[0:i-1]
                     hash_val = data[i:]
                     user_data.append((user, hash_val))
-                    #print("User: " + str(user) + " Hash_val: " + str(hash_val))
                     break
     return user_data
 
-
 if __name__ == "__main__":
-    main()  
+    main() 
